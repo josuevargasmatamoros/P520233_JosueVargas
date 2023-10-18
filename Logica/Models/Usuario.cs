@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace Logica.Models
 {
@@ -34,6 +35,21 @@ namespace Logica.Models
         public bool Agregar()
         {
             bool R = false;
+
+            Conexion MiCcn = new Conexion();
+
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@Cedula", this.Cedula));
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@Nombre", this.Name));
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@Correo", this.Correo));
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@Contrasennia", this.Contrasennia));
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@Telefono", this.Telefono));
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@Direccion", this.Direccion));
+
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@UsuarioRolID", this.MiUsuarioRol.UsuarioRolID));
+
+            int resultado = MiCcn.EjecutarDML("SPUsuariosAgregar");
+
+            if(resultado > 0) R = true;
 
 
 
@@ -66,20 +82,36 @@ namespace Logica.Models
             return R;
         }
 
-        public bool ConsultarPorCedula(string Cedula)
+        public bool ConsultarPorCedula(string pCedula)
         {
             bool R = false;
 
+            Conexion MiCnn = new Conexion();
 
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Cedula",pCedula));
+
+            DataTable dt = new DataTable();
+
+            dt = MiCnn.EjecutarSelect("SPUsuariosConsultarPorCedula");
+
+            if(dt != null && dt.Rows.Count > 0) R = true;
 
             return R;
         }
 
-        public bool ConsultarPorCorreo(string Correo)
+        public bool ConsultarPorCorreo(string pCorreo)
         {
             bool R = false;
 
+            Conexion MiCnn = new Conexion();
 
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Correo", pCorreo));
+
+            DataTable dt = new DataTable();
+
+            dt = MiCnn.EjecutarSelect("SPUsuariosConsultarPorCorreo");
+
+            if (dt != null && dt.Rows.Count > 0) R = true;
 
             return R;
         }
@@ -88,6 +120,11 @@ namespace Logica.Models
         {
             DataTable R = new DataTable();
 
+            Conexion MiCnn = new Conexion();
+
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@VerActivos", true));
+
+            R = MiCnn.EjecutarSelect("SPUsuariosListar");  
             return R;
         }
 

@@ -36,5 +36,11 @@ namespace P520233_JosueVargas.Formularios
         {
             Application.Exit();
         }
+
+        private void BtnIngresar_Click(object sender, EventArgs e)
+        {
+            Globales.ObjetosGlobales.MiFormularioPrincipal.Show();
+            this.Hide();
+        }
     }
 }
