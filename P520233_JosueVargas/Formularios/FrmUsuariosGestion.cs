@@ -85,9 +85,51 @@ namespace P520233_JosueVargas.Formularios
             { 
             R = true;
             }
+            else
+            {
+                //indicar al usuario qué validación está faltando
+
+                //CEDULA
+                if (string.IsNullOrEmpty(TxtUsuarioCedula.Text.Trim()))
+                {
+                    MessageBox.Show("Debe digitar la Cédula", "Error de validación", MessageBoxButtons.OK);
+                    return false;
+                }
+
+                //NOMBRE
+                if (string.IsNullOrEmpty(TxtUsuarioNombre.Text.Trim()))
+                {
+                    MessageBox.Show("Debe digitar el Nombre", "Error de validación", MessageBoxButtons.OK);
+                    return false;
+                }
+
+                //CORREO
+                if (string.IsNullOrEmpty(TxtUsuarioCorreo.Text.Trim()))
+                {
+                    MessageBox.Show("Debe digitar el Correo", "Error de validación", MessageBoxButtons.OK);
+                    return false;
+                }
+
+                //CONTRASEÑA
+                if (string.IsNullOrEmpty(TxtUsuarioContrasennia.Text.Trim()))
+                {
+                    MessageBox.Show("Debe digitar la Contraseña", "Error de validación", MessageBoxButtons.OK);
+                    return false;
+                }
+
+                //ROL DE USUARIO
+                if (CboxUsuarioTipoRol.SelectedIndex == -1)
+                {
+                    MessageBox.Show("Debe Seleccionar un Rol de Usuario", "Error de validación", MessageBoxButtons.OK);
+                    return false;
+                }
+
+            }
 
             return R;
         }
+
+
 
 
 
@@ -97,10 +139,12 @@ namespace P520233_JosueVargas.Formularios
         {
 
 
+            if (ValidarDatosRequeridos())
+            {
 
 
 
-            MiUsuarioLocal = new Logica.Models.Usuario();
+                MiUsuarioLocal = new Logica.Models.Usuario();
 
             MiUsuarioLocal.Cedula = TxtUsuarioCedula.Text.Trim();
             MiUsuarioLocal.Name = TxtUsuarioNombre.Text.Trim();
@@ -141,6 +185,7 @@ namespace P520233_JosueVargas.Formularios
                         MessageBox.Show("El usuario no se pudo ingresar....", "N'ok", MessageBoxButtons.OK);
                     }
                 }
+            }
             }
         }
 
