@@ -18,5 +18,7 @@ namespace P520233_JosueVargas.Globales
         public static Formularios.FrmUsuariosGestion
             MiFormularioDeGestionDeUsuarios = new FrmUsuariosGestion();
 
-    }
+        public static Logica.Models.Usuario MiUsuarioGlobal = new Logica.Models.Usuario();
+
+}
 }

@@ -29,7 +29,9 @@ namespace P520233_JosueVargas.Formularios
 
             CargarComboRolesDeUsuario();
 
-            CargarListaUsuarios();
+            CargarListaUsuarios(CbVerActivos.Checked);
+
+            ActivarBotonAgregar();
         }
 
         private void CargarComboRolesDeUsuario()
@@ -56,34 +58,68 @@ namespace P520233_JosueVargas.Formularios
 
 
 
-        private void CargarListaUsuarios()
+        private void CargarListaUsuarios(bool VerActivos , string FiltroBusqueda= "")
         {
             Logica.Models.Usuario miusuario = new Logica.Models.Usuario();
 
             DataTable lista = new DataTable();
 
-            lista = miusuario.ListarActivos();
+            
 
-            DgvListaUsuarios.DataSource = lista;
+            if(VerActivos)
+              {
+
+                lista = miusuario.ListarActivos(FiltroBusqueda);
+                DgvListaUsuarios.DataSource = lista;
+            }
+            else
+            {
+
+                lista = miusuario.ListarInactivos(FiltroBusqueda);
+                DgvListaUsuarios.DataSource = lista;
+
+            }
+
 
 
         }
 
 
     
-        private bool ValidarDatosRequeridos()
+        private bool ValidarDatosRequeridos(bool OmitirContrasennia = false)
         {
 
             bool R = false;
 
+            //validar que se hayan digitado valores en los campos obligatorios
             if (!string.IsNullOrEmpty(TxtUsuarioCedula.Text.Trim()) &&
-            !string.IsNullOrEmpty(TxtUsuarioNombre.Text.Trim()) &&
-            !string.IsNullOrEmpty(TxtUsuarioCorreo.Text.Trim()) &&
-            !string.IsNullOrEmpty(TxtUsuarioContrasennia.Text.Trim()) &&
-            CboxUsuarioTipoRol.SelectedIndex > -1
-            ) 
-            { 
-            R = true;
+                !string.IsNullOrEmpty(TxtUsuarioNombre.Text.Trim()) &&
+                !string.IsNullOrEmpty(TxtUsuarioCorreo.Text.Trim()) &&
+                CboxUsuarioTipoRol.SelectedIndex > -1
+                )
+            {
+                if (OmitirContrasennia)
+                {
+                    //Si se omite la contraseña entonces se pasa a true
+                    R = true;
+                }
+                else
+                {
+                    //Si no se omite la contraseña debemos validar también ese campo
+                    if (!string.IsNullOrEmpty(TxtUsuarioContrasennia.Text.Trim()))
+                    {
+                        R = true;
+                    }
+                    else
+                    {
+                        //CONTRASEÑA
+                        if (string.IsNullOrEmpty(TxtUsuarioContrasennia.Text.Trim()))
+                        {
+                            MessageBox.Show("Debe digitar la Contraseña", "Error de validación", MessageBoxButtons.OK);
+                            return false;
+                        }
+                    }
+                }
             }
             else
             {
@@ -110,13 +146,6 @@ namespace P520233_JosueVargas.Formularios
                     return false;
                 }
 
-                //CONTRASEÑA
-                if (string.IsNullOrEmpty(TxtUsuarioContrasennia.Text.Trim()))
-                {
-                    MessageBox.Show("Debe digitar la Contraseña", "Error de validación", MessageBoxButtons.OK);
-                    return false;
-                }
-
                 //ROL DE USUARIO
                 if (CboxUsuarioTipoRol.SelectedIndex == -1)
                 {
@@ -127,6 +156,7 @@ namespace P520233_JosueVargas.Formularios
             }
 
             return R;
+
         }
 
 
@@ -177,7 +207,7 @@ namespace P520233_JosueVargas.Formularios
                     MessageBox.Show("Usuario ingresado correctamente!","ok",MessageBoxButtons.OK);
 
                         LimpiarForm();
-                        CargarListaUsuarios();
+                        CargarListaUsuarios(CbVerActivos.Checked);
 
                     }
                     else
@@ -207,6 +237,164 @@ namespace P520233_JosueVargas.Formularios
 
         }
 
+      
+
+       
+
+        private void DgvListaUsuarios_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //primero validamos que se haya seleccionado una linea del dgv, y que sea solo una
+            if (DgvListaUsuarios.SelectedRows.Count == 1)
+            {
+                LimpiarForm();
+
+                //como necesito consultar por el ID del usuario, se debe extraer el valor de la columna 
+                //correspondiente del DGV, en este caso "ColUsuarioID"
+                DataGridViewRow MiDgvFila = DgvListaUsuarios.SelectedRows[0];
+                int IDUsuario = Convert.ToInt32(MiDgvFila.Cells["ColUsuarioID"].Value);
+
+                MiUsuarioLocal = new Logica.Models.Usuario();
+                MiUsuarioLocal = MiUsuarioLocal.ConsultarPorID(IDUsuario);
+
+                if (MiUsuarioLocal != null && MiUsuarioLocal.UsuarioID > 0)
+                {
+                    //una vez que se ha asegurado que existe el usuario y que tiene datos se "dibujan" esos 
+                    //datos en los controles correspondientes del formulario 
+
+                    TxtUsuarioCodigo.Text = MiUsuarioLocal.UsuarioID.ToString();
+                    TxtUsuarioCedula.Text = MiUsuarioLocal.Cedula;
+                    TxtUsuarioNombre.Text = MiUsuarioLocal.Name;
+                    TxtUsuarioCorreo.Text = MiUsuarioLocal.Correo;
+                    TxtUsuarioTelefono.Text = MiUsuarioLocal.Telefono;
+                    TxtUsaurioDireccion.Text = MiUsuarioLocal.Direccion;
+
+                    //en este caso no quiere que se muestre la contraseña ya que está encriptada y no se 
+                    //requiere actualizarla y se deja en blanco el campo de texto 
+
+                    CboxUsuarioTipoRol.SelectedValue = MiUsuarioLocal.MiUsuarioRol.UsuarioRolID;
+                    CbUsuarioActivo.Checked = MiUsuarioLocal.Activo;
+
+                    ActivarBotonesModificarYEliminar();
+
+                }
+            }
+        }
+
+        private void BtnLimpiar_Click(object sender, EventArgs e)
+        {
+            LimpiarForm();
+            ActivarBotonAgregar();
+        }
+
+        private void ActivarBotonAgregar()
+        {
+            BtnAgregar.Enabled = true;
+            BtnModificar.Enabled = false;
+            BtnEliminar.Enabled = false;
+        }
+
+        private void ActivarBotonesModificarYEliminar()
+        {
+            BtnAgregar.Enabled = false;
+            BtnModificar.Enabled = true;
+            BtnEliminar.Enabled = true;
+        }
+
+        private void DgvListaUsuarios_DataBindingComplete(object sender, DataGridViewBindingCompleteEventArgs e)
+        {
+            DgvListaUsuarios.ClearSelection();
+        }
+
+        private void BtnModificar_Click(object sender, EventArgs e)
+        {
+            if (ValidarDatosRequeridos(true))
+            {
+
+                MiUsuarioLocal.Name = TxtUsuarioNombre.Text.Trim();
+                MiUsuarioLocal.Cedula = TxtUsuarioCedula.Text.Trim();
+                MiUsuarioLocal.Correo = TxtUsuarioCorreo.Text.Trim();
+                MiUsuarioLocal.Telefono = TxtUsuarioTelefono.Text.Trim();
+                MiUsuarioLocal.MiUsuarioRol.UsuarioRolID = Convert.ToInt32(CboxUsuarioTipoRol.SelectedValue);
+                MiUsuarioLocal.Direccion = TxtUsaurioDireccion.Text.Trim();
+
+                //depende de si e digitó o no una contraseña, habrán dos distintos UPDATE en los SPs
+                MiUsuarioLocal.Contrasennia = TxtUsuarioContrasennia.Text.Trim();
+
+                //en el diagrama expandido de casos de uso para el tema Usuario, se indica 
+                // que para modificar o eliminar primero se debe consultar por el ID
+                if (MiUsuarioLocal.ConsultarPorID())
+                {
+                    DialogResult Resp = MessageBox.Show("¿Desea modificar el usuario?", "???",
+                                                           MessageBoxButtons.YesNo);
+                    if (Resp == DialogResult.Yes)
+                    {
+                        //procedemos a modificar el registro del usuario 
+                        if (MiUsuarioLocal.Actualizar())
+                        {
+                            MessageBox.Show("Usuario modificado correctamente!", ":)", MessageBoxButtons.OK);
+
+                            LimpiarForm();
+                            CargarListaUsuarios(CbVerActivos.Checked);
+                            ActivarBotonAgregar();
+                        }
+                    }
+                }
+
+
+
+            }
+
+
+        }
+
+        private void BtnEliminar_Click(object sender, EventArgs e)
+        {
+
+
+            if (CbVerActivos.Checked)
+                {
+
+                if (MiUsuarioLocal.UsuarioID > 0)
+                {
+                    string msg = string.Format("Esta seguro de eliminar el usuario {0}", MiUsuarioLocal.Name);
+
+                    DialogResult respuesta = MessageBox.Show(msg, "Confirmacion requerida", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (respuesta == DialogResult.Yes && MiUsuarioLocal.Eliminar())
+                    {
+                        MessageBox.Show("El usuario ha sido eliminado", "!!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        LimpiarForm();
+                        CargarListaUsuarios(CbVerActivos.Checked);
+                        ActivarBotonAgregar();
+
+
+                    }
+
+                }
+
+            }
+            else
+            {
+                if (MiUsuarioLocal.UsuarioID > 0)
+                {
+                    string msg = string.Format("Esta seguro de activar el usuario {0}", MiUsuarioLocal.Name);
+
+                    DialogResult respuesta = MessageBox.Show(msg, "Confirmacion requerida", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                    if (respuesta == DialogResult.Yes && MiUsuarioLocal.Activar())
+                    {
+                        MessageBox.Show("El usuario ha sido activado", "!!!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        LimpiarForm();
+                        CargarListaUsuarios(CbVerActivos.Checked);
+                        ActivarBotonAgregar();
+
+
+                    }
+
+                }
+            }
 
 
 
@@ -214,5 +402,93 @@ namespace P520233_JosueVargas.Formularios
 
 
 
+            if (MiUsuarioLocal.UsuarioID > 0)
+                {
+                string msg = string.Format("Esta seguro de eliminar el usuario {0}", MiUsuarioLocal.Name);
+
+                DialogResult respuesta = MessageBox.Show(msg, "Confirmacion requerida",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+
+                if (respuesta==DialogResult.Yes &&  MiUsuarioLocal.Eliminar())
+                    { 
+                 MessageBox.Show("El usuario ha sido eliminado", "!!!", MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+                 LimpiarForm();
+                 CargarListaUsuarios(CbVerActivos.Checked);
+                 ActivarBotonAgregar();
+
+                    
+                }
+
+            }
+        }
+
+        private void TxtUsuarioCedula_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            e.Handled = Tools.Validaciones.CaracteresNumeros(e);
+
+
+        }
+
+        private void TxtUsuarioNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Tools.Validaciones.CaracteresTexto(e);
+        }
+
+        private void TxtUsuarioCorreo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Tools.Validaciones.CaracteresTexto(e,false,true);
+        }
+
+        private void TxtUsuarioTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Tools.Validaciones.CaracteresNumeros(e);
+        }
+
+        private void TxtUsuarioContrasennia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Tools.Validaciones.CaracteresTexto(e);
+        }
+
+        private void TxtUsaurioDireccion_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Tools.Validaciones.CaracteresTexto(e);
+        }
+
+        private void BtnCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void CbVerActivos_CheckedChanged(object sender, EventArgs e)
+        {
+
+            CargarListaUsuarios(CbVerActivos.Checked);
+
+
+
+            if(CbVerActivos.Checked){
+                BtnEliminar.Text = "ELIMINAR";
+            }
+            else
+            {
+                BtnEliminar.Text = "ACTIVAR";
+            }
+
+        }
+
+        private void TxtBuscar_TextChanged(object sender, EventArgs e)
+        {
+            if(!string.IsNullOrEmpty(TxtBuscar.Text.Trim())&& TxtBuscar.Text.Count() >=3) 
+            {
+                CargarListaUsuarios(CbVerActivos.Checked, TxtBuscar.Text.Trim());
+            }
+            else
+            {
+                CargarListaUsuarios(CbVerActivos.Checked);
+            }
+
+        }
     }
 }
+

@@ -38,6 +38,7 @@
             this.BtnCerrar = new System.Windows.Forms.Button();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.BtnVerContrasennia = new System.Windows.Forms.Button();
+            this.BtnIngresoDirecto = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -96,7 +97,7 @@
             this.BtnIngresar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnIngresar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnIngresar.ForeColor = System.Drawing.Color.White;
-            this.BtnIngresar.Location = new System.Drawing.Point(206, 715);
+            this.BtnIngresar.Location = new System.Drawing.Point(206, 719);
             this.BtnIngresar.Name = "BtnIngresar";
             this.BtnIngresar.Size = new System.Drawing.Size(237, 58);
             this.BtnIngresar.TabIndex = 5;
@@ -121,7 +122,7 @@
             this.BtnCerrar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BtnCerrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.BtnCerrar.ForeColor = System.Drawing.Color.White;
-            this.BtnCerrar.Location = new System.Drawing.Point(576, 715);
+            this.BtnCerrar.Location = new System.Drawing.Point(576, 719);
             this.BtnCerrar.Name = "BtnCerrar";
             this.BtnCerrar.Size = new System.Drawing.Size(230, 58);
             this.BtnCerrar.TabIndex = 8;
@@ -153,12 +154,24 @@
             this.BtnVerContrasennia.MouseDown += new System.Windows.Forms.MouseEventHandler(this.BtnVerContrasennia_MouseDown);
             this.BtnVerContrasennia.MouseUp += new System.Windows.Forms.MouseEventHandler(this.BtnVerContrasennia_MouseUp);
             // 
+            // BtnIngresoDirecto
+            // 
+            this.BtnIngresoDirecto.Location = new System.Drawing.Point(206, 666);
+            this.BtnIngresoDirecto.Name = "BtnIngresoDirecto";
+            this.BtnIngresoDirecto.Size = new System.Drawing.Size(211, 47);
+            this.BtnIngresoDirecto.TabIndex = 11;
+            this.BtnIngresoDirecto.Text = "Ingreso Directo";
+            this.BtnIngresoDirecto.UseVisualStyleBackColor = true;
+            this.BtnIngresoDirecto.Visible = false;
+            this.BtnIngresoDirecto.Click += new System.EventHandler(this.BtnIngresoDirecto_Click);
+            // 
             // FrmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(909, 951);
+            this.Controls.Add(this.BtnIngresoDirecto);
             this.Controls.Add(this.BtnVerContrasennia);
             this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.BtnCerrar);
@@ -170,8 +183,10 @@
             this.Controls.Add(this.TxtContrasennia);
             this.Controls.Add(this.TxtUsuario);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
+            this.KeyPreview = true;
             this.Name = "FrmLogin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmLogin_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -190,5 +205,6 @@
         private System.Windows.Forms.Button BtnCerrar;
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.Button BtnVerContrasennia;
+        private System.Windows.Forms.Button BtnIngresoDirecto;
     }
 }

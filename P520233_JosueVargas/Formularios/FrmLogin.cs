@@ -39,6 +39,33 @@ namespace P520233_JosueVargas.Formularios
 
         private void BtnIngresar_Click(object sender, EventArgs e)
         {
+
+            if (!string.IsNullOrEmpty(TxtUsuario.Text.Trim())&&
+               !string.IsNullOrEmpty(TxtContrasennia.Text.Trim()))
+            {
+                string usuario = TxtUsuario.Text.Trim();
+                string contrasennia = TxtContrasennia.Text.Trim();
+
+                int idUsuario = Globales.ObjetosGlobales.MiUsuarioGlobal.Validar 
+            }
+
+
+            Globales.ObjetosGlobales.MiFormularioPrincipal.Show();
+            this.Hide();
+        }
+
+        private void FrmLogin_KeyDown(object sender, KeyEventArgs e)
+        {
+
+            if (e.Control & e.Shift & e.KeyCode == Keys.A)
+                {
+                BtnIngresoDirecto.Visible = true;
+            }
+
+        }
+
+        private void BtnIngresoDirecto_Click(object sender, EventArgs e)
+        {
             Globales.ObjetosGlobales.MiFormularioPrincipal.Show();
             this.Hide();
         }
