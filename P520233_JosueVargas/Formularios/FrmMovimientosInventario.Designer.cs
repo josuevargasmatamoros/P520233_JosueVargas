@@ -38,10 +38,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.DgvListaDetalle = new System.Windows.Forms.DataGridView();
+            this.CProductoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CNombreProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CCantidadMovimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CSubtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CTotalIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CPrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CCodigoDeBarras = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.BtnAgregar = new System.Windows.Forms.ToolStripButton();
-            this.BtnModificar = new System.Windows.Forms.ToolStripButton();
-            this.BtnEliminar = new System.Windows.Forms.ToolStripButton();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.LblTotalGranTotal = new System.Windows.Forms.Label();
@@ -54,14 +59,9 @@
             this.LblTotalCosto = new System.Windows.Forms.Label();
             this.BtnAplicar = new System.Windows.Forms.Button();
             this.BtnCancelar = new System.Windows.Forms.Button();
-            this.CProductoID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CNombreProducto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CCantidadMovimiento = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CCosto = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CSubtotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CTotalIVA = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CPrecioUnitario = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CCodigoDeBarras = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtnAgregar = new System.Windows.Forms.ToolStripButton();
+            this.BtnModificar = new System.Windows.Forms.ToolStripButton();
+            this.BtnEliminar = new System.Windows.Forms.ToolStripButton();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DgvListaDetalle)).BeginInit();
@@ -173,6 +173,81 @@
             this.DgvListaDetalle.Size = new System.Drawing.Size(1418, 480);
             this.DgvListaDetalle.TabIndex = 1;
             // 
+            // CProductoID
+            // 
+            this.CProductoID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CProductoID.DataPropertyName = "ProductoID";
+            this.CProductoID.HeaderText = "Codigo";
+            this.CProductoID.MinimumWidth = 10;
+            this.CProductoID.Name = "CProductoID";
+            this.CProductoID.ReadOnly = true;
+            this.CProductoID.Width = 90;
+            // 
+            // CNombreProducto
+            // 
+            this.CNombreProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.CNombreProducto.DataPropertyName = "NombreProducto";
+            this.CNombreProducto.HeaderText = "Producto";
+            this.CNombreProducto.MinimumWidth = 10;
+            this.CNombreProducto.Name = "CNombreProducto";
+            this.CNombreProducto.ReadOnly = true;
+            // 
+            // CCantidadMovimiento
+            // 
+            this.CCantidadMovimiento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CCantidadMovimiento.DataPropertyName = "CantidadMovimiento";
+            this.CCantidadMovimiento.HeaderText = "Cantidad";
+            this.CCantidadMovimiento.MinimumWidth = 10;
+            this.CCantidadMovimiento.Name = "CCantidadMovimiento";
+            this.CCantidadMovimiento.ReadOnly = true;
+            this.CCantidadMovimiento.Width = 200;
+            // 
+            // CCosto
+            // 
+            this.CCosto.DataPropertyName = "Costo";
+            this.CCosto.HeaderText = "Costo";
+            this.CCosto.MinimumWidth = 10;
+            this.CCosto.Name = "CCosto";
+            this.CCosto.ReadOnly = true;
+            this.CCosto.Width = 200;
+            // 
+            // CSubtotal
+            // 
+            this.CSubtotal.DataPropertyName = "Subtotal";
+            this.CSubtotal.HeaderText = "Precio sin IVA";
+            this.CSubtotal.MinimumWidth = 10;
+            this.CSubtotal.Name = "CSubtotal";
+            this.CSubtotal.ReadOnly = true;
+            this.CSubtotal.Width = 200;
+            // 
+            // CTotalIVA
+            // 
+            this.CTotalIVA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.CTotalIVA.DataPropertyName = "CTotalIVA";
+            this.CTotalIVA.HeaderText = "IVA";
+            this.CTotalIVA.MinimumWidth = 10;
+            this.CTotalIVA.Name = "CTotalIVA";
+            this.CTotalIVA.ReadOnly = true;
+            this.CTotalIVA.Width = 60;
+            // 
+            // CPrecioUnitario
+            // 
+            this.CPrecioUnitario.DataPropertyName = "PrecioUnitario";
+            this.CPrecioUnitario.HeaderText = "Precio final";
+            this.CPrecioUnitario.MinimumWidth = 10;
+            this.CPrecioUnitario.Name = "CPrecioUnitario";
+            this.CPrecioUnitario.ReadOnly = true;
+            this.CPrecioUnitario.Width = 200;
+            // 
+            // CCodigoDeBarras
+            // 
+            this.CCodigoDeBarras.DataPropertyName = "CodigoDeBarras";
+            this.CCodigoDeBarras.HeaderText = "Codigo de barras";
+            this.CCodigoDeBarras.MinimumWidth = 10;
+            this.CCodigoDeBarras.Name = "CCodigoDeBarras";
+            this.CCodigoDeBarras.ReadOnly = true;
+            this.CCodigoDeBarras.Width = 200;
+            // 
             // toolStrip1
             // 
             this.toolStrip1.BackColor = System.Drawing.Color.Black;
@@ -186,39 +261,6 @@
             this.toolStrip1.Size = new System.Drawing.Size(1418, 47);
             this.toolStrip1.TabIndex = 0;
             this.toolStrip1.Text = "toolStrip1";
-            // 
-            // BtnAgregar
-            // 
-            this.BtnAgregar.BackColor = System.Drawing.Color.DarkGreen;
-            this.BtnAgregar.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnAgregar.ForeColor = System.Drawing.Color.White;
-            this.BtnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("BtnAgregar.Image")));
-            this.BtnAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BtnAgregar.Name = "BtnAgregar";
-            this.BtnAgregar.Size = new System.Drawing.Size(284, 41);
-            this.BtnAgregar.Text = "Agergar Producto";
-            // 
-            // BtnModificar
-            // 
-            this.BtnModificar.BackColor = System.Drawing.Color.Chocolate;
-            this.BtnModificar.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnModificar.ForeColor = System.Drawing.Color.White;
-            this.BtnModificar.Image = ((System.Drawing.Image)(resources.GetObject("BtnModificar.Image")));
-            this.BtnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BtnModificar.Name = "BtnModificar";
-            this.BtnModificar.Size = new System.Drawing.Size(304, 41);
-            this.BtnModificar.Text = "Modificar Producto";
-            // 
-            // BtnEliminar
-            // 
-            this.BtnEliminar.BackColor = System.Drawing.Color.Maroon;
-            this.BtnEliminar.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnEliminar.ForeColor = System.Drawing.Color.White;
-            this.BtnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("BtnEliminar.Image")));
-            this.BtnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.BtnEliminar.Name = "BtnEliminar";
-            this.BtnEliminar.Size = new System.Drawing.Size(158, 41);
-            this.BtnEliminar.Text = "Eliminar";
             // 
             // groupBox3
             // 
@@ -383,79 +425,39 @@
             this.BtnCancelar.UseVisualStyleBackColor = false;
             this.BtnCancelar.Click += new System.EventHandler(this.BtnCancelar_Click);
             // 
-            // CProductoID
+            // BtnAgregar
             // 
-            this.CProductoID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CProductoID.DataPropertyName = "ProductoID";
-            this.CProductoID.HeaderText = "Codigo";
-            this.CProductoID.MinimumWidth = 10;
-            this.CProductoID.Name = "CProductoID";
-            this.CProductoID.ReadOnly = true;
-            this.CProductoID.Width = 90;
+            this.BtnAgregar.BackColor = System.Drawing.Color.DarkGreen;
+            this.BtnAgregar.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnAgregar.ForeColor = System.Drawing.Color.White;
+            this.BtnAgregar.Image = ((System.Drawing.Image)(resources.GetObject("BtnAgregar.Image")));
+            this.BtnAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnAgregar.Name = "BtnAgregar";
+            this.BtnAgregar.Size = new System.Drawing.Size(284, 41);
+            this.BtnAgregar.Text = "Agergar Producto";
+            this.BtnAgregar.Click += new System.EventHandler(this.BtnAgregar_Click);
             // 
-            // CNombreProducto
+            // BtnModificar
             // 
-            this.CNombreProducto.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CNombreProducto.DataPropertyName = "NombreProducto";
-            this.CNombreProducto.HeaderText = "Producto";
-            this.CNombreProducto.MinimumWidth = 10;
-            this.CNombreProducto.Name = "CNombreProducto";
-            this.CNombreProducto.ReadOnly = true;
+            this.BtnModificar.BackColor = System.Drawing.Color.Chocolate;
+            this.BtnModificar.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnModificar.ForeColor = System.Drawing.Color.White;
+            this.BtnModificar.Image = ((System.Drawing.Image)(resources.GetObject("BtnModificar.Image")));
+            this.BtnModificar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnModificar.Name = "BtnModificar";
+            this.BtnModificar.Size = new System.Drawing.Size(304, 44);
+            this.BtnModificar.Text = "Modificar Producto";
             // 
-            // CCantidadMovimiento
+            // BtnEliminar
             // 
-            this.CCantidadMovimiento.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CCantidadMovimiento.DataPropertyName = "CantidadMovimiento";
-            this.CCantidadMovimiento.HeaderText = "Cantidad";
-            this.CCantidadMovimiento.MinimumWidth = 10;
-            this.CCantidadMovimiento.Name = "CCantidadMovimiento";
-            this.CCantidadMovimiento.ReadOnly = true;
-            // 
-            // CCosto
-            // 
-            this.CCosto.DataPropertyName = "Costo";
-            this.CCosto.HeaderText = "Costo";
-            this.CCosto.MinimumWidth = 10;
-            this.CCosto.Name = "CCosto";
-            this.CCosto.ReadOnly = true;
-            this.CCosto.Width = 200;
-            // 
-            // CSubtotal
-            // 
-            this.CSubtotal.DataPropertyName = "Subtotal";
-            this.CSubtotal.HeaderText = "Precio sin IVA";
-            this.CSubtotal.MinimumWidth = 10;
-            this.CSubtotal.Name = "CSubtotal";
-            this.CSubtotal.ReadOnly = true;
-            this.CSubtotal.Width = 200;
-            // 
-            // CTotalIVA
-            // 
-            this.CTotalIVA.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.CTotalIVA.DataPropertyName = "CTotalIVA";
-            this.CTotalIVA.HeaderText = "IVA";
-            this.CTotalIVA.MinimumWidth = 10;
-            this.CTotalIVA.Name = "CTotalIVA";
-            this.CTotalIVA.ReadOnly = true;
-            this.CTotalIVA.Width = 60;
-            // 
-            // CPrecioUnitario
-            // 
-            this.CPrecioUnitario.DataPropertyName = "PrecioUnitario";
-            this.CPrecioUnitario.HeaderText = "Precio final";
-            this.CPrecioUnitario.MinimumWidth = 10;
-            this.CPrecioUnitario.Name = "CPrecioUnitario";
-            this.CPrecioUnitario.ReadOnly = true;
-            this.CPrecioUnitario.Width = 200;
-            // 
-            // CCodigoDeBarras
-            // 
-            this.CCodigoDeBarras.DataPropertyName = "CodigoDeBarras";
-            this.CCodigoDeBarras.HeaderText = "Codigo de barras";
-            this.CCodigoDeBarras.MinimumWidth = 10;
-            this.CCodigoDeBarras.Name = "CCodigoDeBarras";
-            this.CCodigoDeBarras.ReadOnly = true;
-            this.CCodigoDeBarras.Width = 200;
+            this.BtnEliminar.BackColor = System.Drawing.Color.Maroon;
+            this.BtnEliminar.Font = new System.Drawing.Font("Segoe UI", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnEliminar.ForeColor = System.Drawing.Color.White;
+            this.BtnEliminar.Image = ((System.Drawing.Image)(resources.GetObject("BtnEliminar.Image")));
+            this.BtnEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.BtnEliminar.Name = "BtnEliminar";
+            this.BtnEliminar.Size = new System.Drawing.Size(158, 44);
+            this.BtnEliminar.Text = "Eliminar";
             // 
             // FrmMovimientosInventario
             // 

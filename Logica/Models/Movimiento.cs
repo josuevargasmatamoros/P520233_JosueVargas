@@ -74,7 +74,17 @@ namespace Logica.Models
 
         List<MovimientoDetalle> Detalles { get; set; }
 
+        public DataTable AsignarEsquemaDelDetalle()
+        {
+            DataTable R = new DataTable();
 
+            Conexion MyCnn = new Conexion();
+            R = MyCnn.EjecutarSelect("SPMovimientoCargarDetalle", true);
+
+            R.PrimaryKey = null;
+
+            return R;
+        }
 
 
     }
