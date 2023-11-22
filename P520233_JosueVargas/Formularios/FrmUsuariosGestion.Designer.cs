@@ -366,6 +366,7 @@
             this.CboxUsuarioTipoRol.Name = "CboxUsuarioTipoRol";
             this.CboxUsuarioTipoRol.Size = new System.Drawing.Size(433, 33);
             this.CboxUsuarioTipoRol.TabIndex = 7;
+         
             // 
             // TxtUsuarioCorreo
             // 

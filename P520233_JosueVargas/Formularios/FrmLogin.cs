@@ -46,12 +46,24 @@ namespace P520233_JosueVargas.Formularios
                 string usuario = TxtUsuario.Text.Trim();
                 string contrasennia = TxtContrasennia.Text.Trim();
 
-                int idUsuario = Globales.ObjetosGlobales.MiUsuarioGlobal.Validar 
+                int idUsuario = Globales.ObjetosGlobales.MiUsuarioGlobal.ValidarIngreso(usuario, contrasennia);
+
+                if (idUsuario > 0)
+                {
+                    Globales.ObjetosGlobales.MiUsuarioGlobal = Globales.ObjetosGlobales.MiUsuarioGlobal.ConsultarPorID(idUsuario);
+
+                    Globales.ObjetosGlobales.MiFormularioPrincipal.Show();
+                    this.Hide();
+                }
+                else
+                {
+
+                    MessageBox.Show("Acceso deneegado", "ERROR de validacion",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    TxtUsuario.Focus();
+                    TxtUsuario.SelectAll();
+
+                }
             }
-
-
-            Globales.ObjetosGlobales.MiFormularioPrincipal.Show();
-            this.Hide();
         }
 
         private void FrmLogin_KeyDown(object sender, KeyEventArgs e)

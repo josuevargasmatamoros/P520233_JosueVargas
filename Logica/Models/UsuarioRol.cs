@@ -15,7 +15,7 @@ namespace Logica.Models
         public int UsuarioRolID
         {get;set; }
 
-
+        
         public string Rol { get; set; }
 
 
