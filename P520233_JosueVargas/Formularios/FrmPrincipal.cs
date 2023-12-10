@@ -82,5 +82,16 @@ namespace P520233_JosueVargas.Formularios
 
             }
         }
+
+        private void MnuGestionProductos_Click(object sender, EventArgs e)
+        {
+            if (!Globales.ObjetosGlobales.MiFormularioDeGestionDeProductos.Visible)
+            {
+
+              Globales.ObjetosGlobales.MiFormularioDeGestionDeProductos = new FrmProductosGestion();
+
+            Globales.ObjetosGlobales.MiFormularioDeGestionDeProductos.Show();
+            }
+        }
     }
 }

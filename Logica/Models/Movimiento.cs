@@ -50,6 +50,9 @@ namespace Logica.Models
             {
                 IDMovimientoRecienCreado = Convert.ToInt32(RetornoSPAgregar.ToString());
 
+                this.MovimientoID = IDMovimientoRecienCreado;
+
+
                 foreach (MovimientoDetalle item in this.Detalles)
                 {
                     Conexion MyDetalle = new Conexion();

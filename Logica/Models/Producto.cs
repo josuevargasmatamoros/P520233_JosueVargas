@@ -32,11 +32,30 @@ namespace Logica.Models
         public decimal CantidadStock { get; set; }
         public bool Activo { get; set; }
 
-        ProductoCategoria MiCategoria { get; set; }
+        public ProductoCategoria MiCategoria { get; set; }
 
         public bool Agregar()
         {
             bool R = false;
+
+            Conexion MiCcn = new Conexion();
+
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@CodigoBarras", this.CodigoBarras));
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@NombreProdcuto", this.NombreProdcuto));
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@Costo", this.Costo));
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@Utilidad", this.Utilidad));
+
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@SubTotal", this.SubTotal));
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@TasaImpuesto", this.TasaImpuesto));
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@PrecioUnitario", this.PrecioUnitario));
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@CantidadStock", this.CantidadStock));
+           
+
+            MiCcn.ListaDeParametros.Add(new SqlParameter("@ProductoCategoriaID", this.MiCategoria.ProductoCategoriaID));
+
+            int resultado = MiCcn.EjecutarDML("SPProductoAgregar");
+
+            if (resultado > 0) R = true;
 
 
 
@@ -73,18 +92,35 @@ namespace Logica.Models
         {
             bool R = false;
 
+            Conexion MiCnn = new Conexion();
 
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@CodigoBarras", CodigoBarras));
+
+            DataTable dt = new DataTable();
+
+            dt = MiCnn.EjecutarSelect("SPProductosConsultarPorCoidgoBarras");
+
+            if (dt != null && dt.Rows.Count > 0) R = true;
 
             return R;
         }
 
 
-        public DataTable Listar(bool VerActivos = true)
+        public DataTable ListarProductos(bool VerActivos = true, string Filtro = "")
         {
             DataTable R = new DataTable();
 
+            Conexion MiCnn = new Conexion();
+
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@VerActivos", true));
+            MiCnn.ListaDeParametros.Add(new SqlParameter("@Filtro", Filtro));
+
+
+            R = MiCnn.EjecutarSelect("SPProductosListar");
             return R;
         }
+
+        
 
 
 

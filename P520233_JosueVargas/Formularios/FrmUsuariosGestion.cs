@@ -490,7 +490,15 @@ namespace P520233_JosueVargas.Formularios
 
         }
 
-        
+        private void CboxUsuarioTipoRol_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CbUsuarioActivo_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

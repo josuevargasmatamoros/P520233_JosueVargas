@@ -139,6 +139,17 @@ namespace P520233_JosueVargas.Formularios
         {
             if (ValidarMovimiento())
             {
+
+
+
+                DialogResult respuesta = MessageBox.Show("Desea continuar...","???? ",MessageBoxButtons.YesNo);
+
+                if (respuesta == DialogResult.Yes)
+                {
+                    
+               
+
+
                 MiMovimientoLocal.Fecha = DtpFecha.Value.Date;
                 MiMovimientoLocal.Anotaciones = TxtAnotaciones.Text.Trim();
 
@@ -157,6 +168,7 @@ namespace P520233_JosueVargas.Formularios
 
 
 
+                }
                 }
 
 

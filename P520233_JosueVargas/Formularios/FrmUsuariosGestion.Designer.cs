@@ -304,6 +304,7 @@
             this.CbUsuarioActivo.TabIndex = 14;
             this.CbUsuarioActivo.Text = "Activo";
             this.CbUsuarioActivo.UseVisualStyleBackColor = true;
+            this.CbUsuarioActivo.CheckedChanged += new System.EventHandler(this.CbUsuarioActivo_CheckedChanged);
             // 
             // TxtUsaurioDireccion
             // 
@@ -366,7 +367,7 @@
             this.CboxUsuarioTipoRol.Name = "CboxUsuarioTipoRol";
             this.CboxUsuarioTipoRol.Size = new System.Drawing.Size(433, 33);
             this.CboxUsuarioTipoRol.TabIndex = 7;
-         
+            this.CboxUsuarioTipoRol.SelectedIndexChanged += new System.EventHandler(this.CboxUsuarioTipoRol_SelectedIndexChanged);
             // 
             // TxtUsuarioCorreo
             // 

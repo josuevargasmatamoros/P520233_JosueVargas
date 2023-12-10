@@ -22,5 +22,8 @@ namespace P520233_JosueVargas.Globales
 
         public static Formularios.FrmMovimientosInventario
             MiformularioMovimientos = new Formularios.FrmMovimientosInventario();
-}
+
+        public static Formularios.FrmProductosGestion
+            MiFormularioDeGestionDeProductos = new FrmProductosGestion();
+    }
 }
